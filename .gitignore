@@ -1,0 +1,4 @@
+# large rebuildable market data (regenerate with src/load.py from HistData zips) - each > GitHub's 100 MB limit or bulky
+data/*_M1_utc.parquet
+__pycache__/
+*.pyc

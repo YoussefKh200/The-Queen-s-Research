@@ -1,0 +1,27 @@
+Dukascopy sample: 90 random weekdays 2018-2026, 62185 M1 bars with real tick bid/ask
+
+--- Spread (pips, mean of tick spreads within the minute) & 1-min bid range by NY clock (weekday sample) ---
+  NY 23:59: n= 90 spread mean  0.98 median  0.98 max    1.9 | bid range mean  1.12 | ticks/min  45.1
+  NY 00:00: n= 90 spread mean  0.97 median  0.97 max    2.0 | bid range mean  1.49 | ticks/min  51.4
+  NY 00:01: n= 90 spread mean  0.96 median  0.96 max    2.0 | bid range mean  1.29 | ticks/min  47.5
+  NY 00:05: n= 90 spread mean  0.96 median  0.93 max    2.1 | bid range mean  1.19 | ticks/min  44.4
+  NY 03:00: n= 90 spread mean  0.82 median  0.81 max    1.4 | bid range mean  5.05 | ticks/min 192.5
+  NY 16:59: n= 30 spread mean  3.01 median  2.28 max   12.2 | bid range mean  3.56 | ticks/min  74.4
+  NY 17:00: n= 71 spread mean  6.60 median  6.19 max   14.3 | bid range mean  2.47 | ticks/min   9.3
+  NY 17:01: n= 56 spread mean  7.05 median  6.83 max   15.0 | bid range mean  1.72 | ticks/min   8.0
+  NY 17:05: n= 75 spread mean  6.94 median  5.70 max   20.5 | bid range mean  2.69 | ticks/min  18.8
+  NY 17:30: n= 76 spread mean  4.74 median  4.10 max   15.6 | bid range mean  2.22 | ticks/min  56.1
+
+--- Decomposition of first-minutes move: BID move = MID move - dSpread/2 (pips) ---
+  NY 00:00             + 1m (n=90): mean|bid|  0.93 | mean|mid|  0.91 | mean dSpread -0.01 | mean bid -0.05 mean mid -0.06
+  NY 00:00             + 5m (n=90): mean|bid|  1.62 | mean|mid|  1.63 | mean dSpread +0.01 | mean bid +0.27 mean mid +0.27
+  NY 00:00             +30m (n=90): mean|bid|  2.93 | mean|mid|  2.92 | mean dSpread -0.00 | mean bid -0.11 mean mid -0.11
+  NY 17:00 (rollover)  + 1m (n=25): mean|bid|  1.64 | mean|mid|  1.14 | mean dSpread +1.87 | mean bid -1.13 mean mid -0.20
+  NY 17:00 (rollover)  + 5m (n=20): mean|bid|  2.33 | mean|mid|  2.38 | mean dSpread +3.15 | mean bid -1.31 mean mid +0.27
+  NY 17:00 (rollover)  +30m (n=26): mean|bid|  1.97 | mean|mid|  2.09 | mean dSpread +0.22 | mean bid +0.21 mean mid +0.32
+
+--- Feed comparison, same UTC minute, Dukascopy bid close vs HistData bid close: n=61849 median diff +0.00, mean|diff| 0.62, p99|diff| 16.90 pips
+  NY 00:00 first-5m mean|bid move|: Dukascopy 1.62 (n=90) vs HistData 1.66 (n=90), same days
+  NY 17:00 first-5m mean|bid move|: Dukascopy 2.33 (n=20) vs HistData 2.52 (n=20), same days
+
+--- Rollover 'edge' check, naive long NY17:00 -> 19:00 (n=47 days): gross-on-bid +3.10 pips | with REAL ask entry -3.85 pips | mean entry spread 6.95
